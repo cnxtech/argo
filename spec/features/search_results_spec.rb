@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -11,7 +10,7 @@ RSpec.describe 'Search results' do
   it 'contains Blacklight default index page tools' do
     visit search_catalog_path f: { empties: ['no_rights_characteristics'] }
     within '.constraints-container' do
-      expect(page).to have_css '#startOverLink', text: 'Start Over'
+      expect(page).to have_css '.catalog_startOverLink', text: 'Start Over'
     end
     within '.search-widgets' do
       within '#bulk-update-button' do

@@ -42,7 +42,7 @@ end
 
 gem 'almond-rails'
 gem 'barby'
-gem 'bootstrap-sass'
+gem 'bootstrap'
 gem 'cancancan'
 gem 'coderay'
 gem 'config'
@@ -68,8 +68,8 @@ gem 'rubyzip'
 gem 'sprockets-es6'
 
 # Stanford/Hydra related gems
-gem 'blacklight', '~> 6.0'
-gem 'blacklight-hierarchy'
+gem 'blacklight', '~> 7.0'
+gem 'blacklight-hierarchy', github: 'sul-dlss/blacklight-hierarchy'
 gem 'dor-services', '~> 7.0'
 gem 'dor-workflow-client', '~> 3.3'
 gem 'mods_display'

@@ -7,7 +7,7 @@
     <!-- Mobile viewport optimization h5bp.com/ad -->
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    
+
     <!-- Internet Explorer use the highest version available -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -36,7 +36,7 @@
   <%= render partial: 'shared/ajax_modal' %>
 
   <div id="main-container" class="container-fluid">
-    <%= render :partial=>'/flash_msg', layout: 'shared/flash_messages' %>
+    <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
     <div class="row">
       <%= yield %>

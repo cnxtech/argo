@@ -14,6 +14,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     ## Class for converting Blacklight's url parameters to into request parameters for the search index
     config.search_builder_class = ::SearchBuilder
+    config.search_service_class = ::SearchService
 
     # common helper method since search results and reports share most of this config
     BlacklightConfigHelper.add_common_default_solr_params_to_config! config
@@ -202,7 +203,7 @@ class CatalogController < ApplicationController
 
   def manage_release
     authorize! :manage_item, Dor.find(params[:id])
-    @response, @document = fetch params[:id]
+    @response, @document = search_service.fetch params[:id]
     @bulk_action = BulkAction.new
 
     respond_to do |format|
@@ -210,28 +211,29 @@ class CatalogController < ApplicationController
     end
   end
 
+    def reformat_dates
+      params.each do |key, val|
+        next unless key =~ /_datepicker/ && val =~ /[0-9]{2}\/[0-9]{2}\/[0-9]{4}/
+
+        val = DateTime.parse(val).beginning_of_day.utc.xmlschema
+        field = key.split('_after_datepicker').first.split('_before_datepicker').first
+        params[:f][field] = '[' + val.to_s + 'Z TO *]'
+      rescue
+      end
+    end
+
   private
 
   def show_aspect
     pid = params[:id].include?('druid') ? params[:id] : "druid:#{params[:id]}"
     @obj ||= Dor.find(pid)
-    @response, @document = fetch pid
+    @response, @document = search_service.fetch pid
   end
 
   def set_user_obj_instance_var
     @user = current_user
   end
 
-  def reformat_dates
-    params.each do |key, val|
-      next unless key =~ /_datepicker/ && val =~ /[0-9]{2}\/[0-9]{2}\/[0-9]{4}/
-
-      val = DateTime.parse(val).beginning_of_day.utc.xmlschema
-      field = key.split('_after_datepicker').first.split('_before_datepicker').first
-      params[:f][field] = '[' + val.to_s + 'Z TO *]'
-    rescue
-    end
-  end
 
   # Sorts the Blacklight collection actions buttons so that the "Bulk Action" and "Bulk Update View" buttons appear
   # at the front of the list.
@@ -254,5 +256,19 @@ class CatalogController < ApplicationController
     blacklight_config.facet_fields.each do |_k, v|
       v.include_in_request = false if v.home == false
     end
+  end
+
+  # TODO: this can be removed when blacklight 7.1 is used.
+  # @return [::SearchService]
+  def search_service
+    ::SearchService.new(config: blacklight_config,
+                        user_params: search_state.to_h,
+                        **search_service_context)
+  end
+
+  # This overrides Blacklight to pass context to the search service
+  # @return [Hash] a hash of context information to pass through to the search service
+  def search_service_context
+    { current_user: current_user}
   end
 end

@@ -1,6 +1,17 @@
 @import 'jquery-ui/custom-theme/jquery-ui-1.8.13.custom';
 @import './argo/*';
 
+
+
+// Inverted navbar
+.navbar-dark {
+  background-color: $color-cardinal-red;
+  color: lighten($color-beige-05, 05%);
+  .navbar-nav .nav-link {
+    color: lighten($color-beige-05, 05%);
+  }
+}
+
 .ui-jqgrid td {
   border: none;
 }

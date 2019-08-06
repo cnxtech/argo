@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/sul-dlss/blacklight-hierarchy.git
+  revision: 0ff0388c93458aa7651ee6c3bcd23d1465b26452
+  specs:
+    blacklight-hierarchy (3.0.0.alpha)
+      blacklight (~> 7.0)
+      jquery-rails
+      rails (>= 4.1, < 6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -74,25 +83,19 @@ GEM
     barby (0.6.8)
     bcrypt (3.1.13)
     bindex (0.8.1)
-    blacklight (6.20.0)
-      bootstrap-sass (~> 3.2)
+    blacklight (7.0.1)
       deprecation
       globalid
       jbuilder (~> 2.7)
       kaminari (>= 0.15)
       nokogiri (~> 1.6)
-      rails (>= 4.2, < 6)
-      rsolr (>= 1.0.6, < 3)
-      twitter-typeahead-rails (= 0.11.1.pre.corejavascript)
-    blacklight-hierarchy (2.0.0)
-      blacklight (~> 6.0)
-      jquery-rails
-      rails (>= 4.1, < 6)
+      rails (~> 5.1)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
-    bootstrap-sass (3.4.1)
-      autoprefixer-rails (>= 5.2.1)
-      sassc (>= 2.0.0)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.3)
     bundler-audit (0.6.1)
       bundler (>= 1.2.0, < 3)
@@ -385,6 +388,7 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     pdf-core (0.4.0)
+    popper_js (1.14.5)
     powerpack (0.1.2)
     prawn (1.3.0)
       pdf-core (~> 0.4.0)
@@ -529,6 +533,12 @@ GEM
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -581,10 +591,6 @@ GEM
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    twitter-typeahead-rails (0.11.1.pre.corejavascript)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -623,10 +629,10 @@ PLATFORMS
 DEPENDENCIES
   almond-rails
   barby
-  blacklight (~> 6.0)
-  blacklight-hierarchy
+  blacklight (~> 7.0)
+  blacklight-hierarchy!
   bootsnap (>= 1.1.0)
-  bootstrap-sass
+  bootstrap
   byebug
   cancancan
   capistrano-passenger

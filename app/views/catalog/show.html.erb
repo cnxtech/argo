@@ -1,5 +1,5 @@
 <% @page_title = t('blacklight.search.show.title', :document_title => truncate(strip_tags(document_show_html_title), length: 50), :application_name => application_name) %>
-<% content_for(:head) { show_presenter(@document).link_rel_alternates } -%>
+<% content_for(:head) { render_link_rel_alternates } %>
 <div id="sidebar" class="col-md-3 col-sm-4">
   <%= render_document_sidebar_partial %>
 </div>
@@ -10,7 +10,7 @@
     <%= item_page_entry_info %>
   </div>
 
-  <%= render 'previous_next_doc' %>
+  <%= render 'previous_next_doc' if @search_context %>
 
   <%# this should be in a partial -%>
   <div id="document" class="<%= render_document_class %>">

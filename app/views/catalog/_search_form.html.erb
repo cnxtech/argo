@@ -1,8 +1,8 @@
-<div id="search" class="search">
-  <%= form_tag location_to_send_search_form, :method => :get, class: 'search-query-form clearfix navbar-form' do %>
+<!-- <div id="search" class="search"> -->
+  <%= form_tag location_to_send_search_form, :method => :get, class: 'search-query-form form-inline' do %>
     <h2 class="search sr-only"><%= label_tag(:q, "Search ") %></h2>
-    <div class='input-group search-input-group'>
-      <%= text_field_tag :q, params[:q], :class => "search_q q form-control" %>
+    <!-- <div class='input-group search-input-group'> -->
+      <%= text_field_tag :q, params[:q], class: "search-q q form-control mr-sm-8" %>
       <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-primary search-btn" id="search">
@@ -10,6 +10,6 @@
           <span class="glyphicon glyphicon-search"></span>
         </button>
       </span>
-    </div>
+    <!-- </div> -->
   <% end %>
-</div>
+<!-- </div> -->
